@@ -8,32 +8,33 @@ import random as rand
 
 
 #-----game configuration----
-wn = trtl.Screen()
 
-
-alan_head = "alan_xmas_head.gif"
-
-wn.addshape(alan_head)
-
-size_of_turtle = 5
 
 score = 0
 
 font_setup = ("Arial", 20, "normal")
 
-timer = 5
+timer = 10
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 
+wn = trtl.Screen()
 
 #-----initialize turtle-----
 
-rikhil = trtl.Turtle()
+alan = trtl.Turtle()
 
 score_writer = trtl.Turtle()
 
 counter =  trtl.Turtle()
 
+list_of_x_coords = [-100, 0, 100]
+
+list_of_y_coords = [-100, 0, 100]
+
+wn.addshape('alan_xmas_head.gif')
+
+alan.shape('alan_xmas_head.gif')
 
 
 #-----game functions--------
@@ -45,16 +46,16 @@ def rikhil_clicked(x, y):
 
     change_position()
   
-def draw_alan(active_alan):
-  active_alan.shape(alan_head)
-  wn.update()
+
 
 def change_position():
-  new_xpos = rand.randint(-400, 400)
-  new_ypos = rand.randint(-300, 300) 
-  rikhil.hideturtle()
-  rikhil.goto(new_xpos, new_ypos)
-  rikhil.showturtle()
+  new_xpos = rand.choice(tuple(list_of_x_coords))
+
+  new_ypos = rand.choice(tuple(list_of_y_coords))
+
+  alan.hideturtle()
+  alan.goto(new_xpos, new_ypos)
+  alan.showturtle()
   
 def update_score():
   global score # gives this function access to the score that was created above
@@ -77,7 +78,6 @@ def countdown():
   if timer <= 0:
     counter.write("Time's Up", font=font_setup)
     timer_up = True
-    
   else:
     counter.write("Timer: " + str(timer), font=font_setup)
     timer -= 1
@@ -87,20 +87,17 @@ def countdown_setup():
   counter.penup()
   counter.hideturtle()
   counter.goto(200, 200)
-  
-  
-
 #-----events----------------
 
-wn.bgcolor("red")
 
-rikhil.penup()
+wn.bgpic("grid.gif")
+
+alan.penup()
 
 score_setup()
 countdown_setup()
 countdown()
-draw_alan(alan_head)
-rikhil.onclick(rikhil_clicked)
+alan.onclick(rikhil_clicked)
 
 
 
