@@ -6,7 +6,15 @@ import turtle as trtl
 
 import random as rand
 
+from playsound import playsound
 
+import libwinmedia
+
+player = libwinmedia.Player()
+
+media = libwinmedia.Media("https://archive.org/download/Kalimba.mp3_377/Kalimba.mp3")
+
+player.open(media)
 #-----game configuration----
 
 
@@ -19,6 +27,7 @@ counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 
 wn = trtl.Screen()
+
 
 #-----initialize turtle-----
 
@@ -45,6 +54,12 @@ def rikhil_clicked(x, y):
     update_score()
 
     change_position()
+  alan_scream()
+
+    
+def alan_scream():
+  playsound(r'C:/Users/rsharma/Desktop/CSP/PLTW-1.2.5/alanscream.mp3')
+
   
 
 
@@ -88,7 +103,6 @@ def countdown_setup():
   counter.hideturtle()
   counter.goto(200, 200)
 #-----events----------------
-
 
 wn.bgpic("grid.gif")
 
