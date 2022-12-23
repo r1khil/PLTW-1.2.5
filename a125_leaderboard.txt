@@ -1,0 +1,3 @@
+Allison,1000
+LOONA,15
+Diego,2

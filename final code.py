@@ -6,17 +6,13 @@ import turtle as trtl
 
 import random as rand
 
-from playsound import playsound
+import leaderboard as lb
 
-import libwinmedia
-
-player = libwinmedia.Player()
-
-media = libwinmedia.Media("https://archive.org/download/Kalimba.mp3_377/Kalimba.mp3")
-
-player.open(media)
 #-----game configuration----
 
+
+leaderboard_file_name = "a125_leaderboard.txt"
+player_name = input ("Please enter your name:")
 
 score = 0
 
@@ -54,13 +50,7 @@ def rikhil_clicked(x, y):
     update_score()
 
     change_position()
-  alan_scream()
 
-    
-def alan_scream():
-  playsound(r'C:/Users/rsharma/Desktop/CSP/PLTW-1.2.5/alanscream.mp3')
-
-  
 
 
 def change_position():
@@ -93,6 +83,8 @@ def countdown():
   if timer <= 0:
     counter.write("Time's Up", font=font_setup)
     timer_up = True
+    wn.clear()
+    manage_leaderboard()
   else:
     counter.write("Timer: " + str(timer), font=font_setup)
     timer -= 1
@@ -102,6 +94,24 @@ def countdown_setup():
   counter.penup()
   counter.hideturtle()
   counter.goto(200, 200)
+
+
+def manage_leaderboard():
+ 
+ global score
+ global alan
+ 
+ # get the names and scores from the leaderboard file
+ leader_names_list = lb.get_names(leaderboard_file_name)
+ leader_scores_list = lb.get_scores(leaderboard_file_name)
+ 
+ # show the leaderboard with or without the current player
+ if (len(leader_scores_list) < 5 or score >= leader_scores_list[4]):
+   lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
+   lb.draw_leaderboard(True, leader_names_list, leader_scores_list, alan, score)
+ 
+ else:
+   lb.draw_leaderboard(False, leader_names_list, leader_scores_list, alan, score)
 #-----events----------------
 
 wn.bgpic("grid.gif")
