@@ -1,3 +1,4 @@
 Allison,1000
+rikhil,18
 LOONA,15
 Diego,2
