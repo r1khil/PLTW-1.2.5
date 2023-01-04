@@ -1,4 +1,5 @@
-Allison,1000
-rikhil,18
+Coldplay,1000
 LOONA,15
+rikhil,13
+rikhil,12
 Diego,2
